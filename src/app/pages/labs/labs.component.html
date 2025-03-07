@@ -9,10 +9,10 @@
   <hr/>
   <h2>{{ 'hola'.repeat(4) }}</h2>
   <p>La suma de 3 + 3 es {{3 + 3 }} </p>
-  <p>Hola, soy {{ person.pname }} y mi edad es {{ person.page }} años</p>
+  <p>Hola, soy {{ person().pname }} y mi edad es {{ person().page }} años</p>
   <hr/>
-  <img [src]="person.pavatar" alt="">
-  <input type="number" [value]="person.page">
+  <img [src]="person().pavatar" alt="">
+  <input type="number" [value]="person().page">
   <button [disabled]="disable">Click me!</button>
   <hr/>
   <button (click)="clickHandler()" >Click me!</button>
@@ -20,10 +20,10 @@
   <button (dblclick)="doubleClickHandler()" >Double Click me!</button>
   <hr/>
   <p>(change)</p>
-  <input type="number" [value]="person.page" (change)="changeHandler($event)">
+  <input type="number" [value]="person().page" (change)="changeHandler($event)">
   <hr/>
   <p>(keydown)</p>
-  <input type="text" [value]="person.pname" (keydown)="keydownHandler($event)">
+  <input type="text" [value]="person().pname" (keydown)="keydownHandler($event)">
   <hr/>
   <h1>Signals</h1>
   <input type="text" [value]="name()" (change)="changeHandler($event)">
@@ -35,4 +35,30 @@
         {{ i }} {{ task }}
     </li>
   </ul>
+  <hr/>
+  <p>(edad)</p>
+  <input type="number" [value]="person().page" (change)="changeAge($event)">
+  <div *ngIf="1 == 1" >
+    Mi contenido
+  </div>
+  <div *ngIf="name() === 'gustavo'" >
+    Mi contenido 2
+  </div>
+  <div *ngIf="person().pname === 'gustavo' && person().page > 18; else elseBlock" >
+    soy {{person().pname}} y soy mayor de 18 años
+  </div>
+  <ng-template #elseBlock>
+    soy {{person().pname}} y soy menor de 18 años
+  </ng-template>
+  <hr/>
+  <p>(nombre)</p>
+  <input type="text" [value]="person().pname" (change)="changeName($event)">
+  <div [ngSwitch]="person().pname">
+    <div *ngSwitchCase="'gustavo'">soy Gustavo</div>
+    <div *ngSwitchCase="'jesus'">soy jesus</div>
+    <div *ngSwitchCase="'tairon'">soy tairon</div>
+    <div *ngSwitchCase="'yunicua'">soy yunicua</div>
+    <div *ngSwitchCase="'tasha'">soy tasha</div>
+    <div *ngSwitchDefault>soy tu padre</div>
+  </div>
 </div>

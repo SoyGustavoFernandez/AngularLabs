@@ -20,11 +20,11 @@ export class LabsComponent {
   age  = 28;
   disable = false;
   img = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png';
-  person = {
-    pname: 'Gustavo',
+  person = signal({
+    pname: 'tairon',
     page: 28,
     pavatar: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
-  };
+  });
   clickHandler() {
     alert('Bienvenido a Angular!');
   };
@@ -38,5 +38,15 @@ export class LabsComponent {
   };
   keydownHandler(event : KeyboardEvent) {
     alert('Tecla presionada!');
-  }
+  };
+  changeAge(event : Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((p) => { return { ...p, page: parseInt(newValue) }; });
+  };
+  changeName(event : Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((p) => { return { ...p, pname: newValue }; });
+  };
 }

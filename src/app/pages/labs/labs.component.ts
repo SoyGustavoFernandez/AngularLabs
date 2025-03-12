@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
-  imports: [ RouterOutlet, CommonModule ],
+  imports: [ RouterOutlet, CommonModule, ReactiveFormsModule ],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css'
 })
@@ -25,6 +26,15 @@ export class LabsComponent {
     page: 28,
     pavatar: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
   });
+
+  colorCtrl = new FormControl('');
+
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log(value);
+    });
+  }
+
   clickHandler() {
     alert('Bienvenido a Angular!');
   };
